@@ -20,14 +20,37 @@ angular.module('awAutoResize', [])
     //link into the DOM for modification
     link: function(scope, element, attrs) {
 
-      //default font size
-      scope.fontSize = '1em';
+      //set options as specified in DOM
+      scope.maxSize = scope.$eval(attrs.awAutoResizeMax);
+      scope.minSize = scope.$eval(attrs.awAutoResizeMin);
+
+      //validate the options
+      if(scope.maxSize <= scope.minSize) {
+        throw new Error('awAutoResize: maxSize can not be less than or equal to minSize ('+scope.maxSize+' <= '+scope.minSize+')');
+        return;
+      }
+
+      //set initial font size
+      if(scope.maxSize && scope.maxSize < element.height()) {
+        scope.fontSize = scope.maxSize;
+      } else if(scope.minSize && scope.minSize > element.height()) {
+        scope.fontSize = scope.minSize;
+      } else {
+        scope.fontSize = element.height();
+      }
+      element.css('font-size', scope.fontSize);
 
       //create a function to call on the window resize
       scope.onResize = function() {
 
         //determine the correct font size
-        scope.fontSize = element.height()
+        if(scope.maxSize && scope.maxSize < element.height()) {
+          scope.fontSize = scope.maxSize;
+        } else if(scope.minSize && scope.minSize > element.height()) {
+          scope.fontSize = scope.minSize;
+        } else {
+          scope.fontSize = element.height();
+        }
 
         //set the font size of the element
         element.css('font-size', scope.fontSize);
@@ -36,6 +59,6 @@ angular.module('awAutoResize', [])
       //bind the windows resize to the function we just created
       angular.element($window).bind('resize', function() { scope.onResize(); });
     }
-    
+
   };
 }]);
