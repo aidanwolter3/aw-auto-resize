@@ -30,16 +30,6 @@ angular.module('awAutoResize', [])
         return;
       }
 
-      //set initial font size
-      if(scope.maxSize && scope.maxSize < element.height()) {
-        scope.fontSize = scope.maxSize;
-      } else if(scope.minSize && scope.minSize > element.height()) {
-        scope.fontSize = scope.minSize;
-      } else {
-        scope.fontSize = element.height();
-      }
-      element.css('font-size', scope.fontSize);
-
       //create a function to call on the window resize
       scope.onResize = function() {
 
@@ -55,6 +45,9 @@ angular.module('awAutoResize', [])
         //set the font size of the element
         element.css('font-size', scope.fontSize);
       }
+
+      //set initial font size
+      scope.onResize();
 
       //bind the windows resize to the function we just created
       angular.element($window).bind('resize', function() { scope.onResize(); });
