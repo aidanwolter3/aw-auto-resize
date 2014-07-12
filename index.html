@@ -5,7 +5,11 @@
   </head>
 
   <body ng-controller="ResizeCtrl">
-    <h1 aw-auto-resize>{{h1Text}}</h1>
+    <h1 aw-auto-resize resize-if="h1Resize">{{h1Text}}</h1>
+    <p>This changes the above header:</p>
+    <input id="h1-input" ng-model="h1Text" ng-change="h1Resize = true"></input>
+
+    <p>Try changing the window size</p>
     <h3 aw-auto-resize min-size="30" max-size="40">{{h3Text}}</h3>
     <textarea aw-auto-resize>{{textareaText}}</textarea>
 

@@ -18,7 +18,9 @@ angular.module('awAutoResize', [])
     restrict: 'A',
 
     //declare the scope as local
-    scope: {},
+    scope: {
+      'needsResize': '=resizeIf'
+    },
 
     //link into the DOM for modification
     link: function(scope, element, attrs) {
@@ -66,6 +68,12 @@ angular.module('awAutoResize', [])
       scope.onResize();
 
       //bind the windows resize to the function we just created
+      scope.$watch('needsResize', function(newValue, oldValue) {
+        if(newValue !== oldValue && newValue === true) {
+          scope.needsResize = false;
+          scope.onResize();
+        }
+      });
       angular.element($window).bind('resize', function() { scope.onResize(); });
       angular.element($window).bind('load', function() { scope.onResize(); });
 
