@@ -19,18 +19,16 @@ angular.module('awAutoResize', [])
 
     //declare the scope as local
     scope: {
-      'needsResize': '=resizeIf'
+      'needsResize': '=resizeIf',
+      'minSize': '=',
+      'maxSize': '='
     },
 
     //link into the DOM for modification
     link: function(scope, element, attrs) {
 
-      //set options as specified in DOM
-      scope.maxSize = scope.$eval(attrs.maxSize);
-      scope.minSize = scope.$eval(attrs.minSize);
-
       //validate the options
-      if(scope.maxSize <= scope.minSize) {
+      if(scope.maxSize && scope.minSize && scope.maxSize <= scope.minSize) {
         throw new Error('awAutoResize: maxSize can not be less than or equal to minSize ('+scope.maxSize+' <= '+scope.minSize+')');
         return;
       }
@@ -62,10 +60,18 @@ angular.module('awAutoResize', [])
           decreaseFontSize();
         }
 
-      } // end onResize
+      } //end onResize
 
       //set initial font size
       scope.onResize();
+
+      //watch scope changes in the attributes
+      scope.$watch('minSize', function() {
+        scope.onResize();
+      })
+      scope.$watch('maxSize', function() {
+        scope.onResize();
+      })
 
       //bind the windows resize to the function we just created
       scope.$watch('needsResize', function(newValue, oldValue) {
@@ -77,7 +83,7 @@ angular.module('awAutoResize', [])
       angular.element($window).bind('resize', function() { scope.onResize(); });
       angular.element($window).bind('load', function() { scope.onResize(); });
 
-    }// end link
+    } //end link
 
   };
 }]);

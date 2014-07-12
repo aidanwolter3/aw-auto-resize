@@ -25,12 +25,18 @@ Give the element font-size bounds with **min-size** and **max-size**.
 <h1 aw-auto-resize min-size="30" max-size="40">Header with font-size bounds</h1>
 ```
 
+Or even pass scope variables into the **min-size** and **max-size** so they respond to udpates.
+```html
+<h1 aw-auto-resize min-size="headerMinSize" max-size="headerMaxSize">
+  Header with variable font-size bounds
+</h1>
+```
+
 ##Todo
 * Allow minimum and maximum bounds to be given in **em** or **px**.
 * Speed up refresh time to reduce window resize lag.
 * Allow users to specify which element attributes trigger a refresh.
 * Come up with a better solution than content overflow after reaching minimum font size.
-* Let the minimum and maximum font sizes to be controlled with a controller scope variable.
 
 ##Dependencies
 * [AngularJS](angularjs.org)

@@ -9,9 +9,11 @@
     <p>This changes the above header:</p>
     <input id="h1-input" ng-model="h1Text" ng-change="h1Resize = true"></input>
 
-    <p>Try changing the window size</p>
-    <h3 aw-auto-resize min-size="30" max-size="40">{{h3Text}}</h3>
-    
+    <p>Try changing the window size and the min/max values:</p>
+    min-size: <input id="h3-input" ng-model="h3Min"></input>
+    max-size: <input id="h3-input" ng-model="h3Max"></input>
+    <h3 aw-auto-resize min-size="h3Min" max-size="h3Max">{{h3Text}}</h3>
+
     <textarea aw-auto-resize>{{textareaText}}</textarea>
 
     <!-- scripts -->
