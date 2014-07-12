@@ -66,8 +66,8 @@ angular.module('awAutoResize', [])
       scope.onResize();
 
       //bind the windows resize to the function we just created
-      // element.on('resize', function() { scope.onResize();});
       angular.element($window).bind('resize', function() { scope.onResize(); });
+      angular.element($window).bind('load', function() { scope.onResize(); });
 
     }// end link
 

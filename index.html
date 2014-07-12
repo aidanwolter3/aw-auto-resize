@@ -5,11 +5,9 @@
   </head>
 
   <body ng-controller="ResizeCtrl">
-    <h1 aw-auto-resize>This is a header which adjusts its font-size</h1>
-    <h3 aw-auto-resize min-size="30" max-size="40">Another example except this has a min-size=30 and max-size=40.</h3>
-    <textarea aw-auto-resize>This is a textarea which also adjusts its font-size.
-                             Resize the window to trigger the resize.
-    </textarea>
+    <h1 aw-auto-resize>{{h1Text}}</h1>
+    <h3 aw-auto-resize min-size="30" max-size="40">{{h3Text}}</h3>
+    <textarea aw-auto-resize>{{textareaText}}</textarea>
 
     <!-- scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.10/angular.js"></script>
