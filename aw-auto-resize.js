@@ -17,12 +17,15 @@ angular.module('awAutoResize', [])
     //restrict the directive to DOM attributes only
     restrict: 'A',
 
+    //declare the scope as local
+    scope: {},
+
     //link into the DOM for modification
     link: function(scope, element, attrs) {
 
       //set options as specified in DOM
-      scope.maxSize = scope.$eval(attrs.awAutoResizeMax);
-      scope.minSize = scope.$eval(attrs.awAutoResizeMin);
+      scope.maxSize = scope.$eval(attrs.maxSize);
+      scope.minSize = scope.$eval(attrs.minSize);
 
       //validate the options
       if(scope.maxSize <= scope.minSize) {
@@ -33,25 +36,40 @@ angular.module('awAutoResize', [])
       //create a function to call on the window resize
       scope.onResize = function() {
 
-        //determine the correct font size
+        //set the starting height as the element's height
+        //make sure to not exceed the max height
         if(scope.maxSize && scope.maxSize < element.height()) {
           scope.fontSize = scope.maxSize;
-        } else if(scope.minSize && scope.minSize > element.height()) {
-          scope.fontSize = scope.minSize;
         } else {
           scope.fontSize = element.height();
         }
+        element.css('font-size', parseFloat(scope.fontSize) + 'px');
 
-        //set the font size of the element
-        element.css('font-size', scope.fontSize);
-      }
+        //function to decrease the font-size by 1
+        var decreaseFontSize = function() {
+          scope.fontSize = element.css('font-size').slice(0, -2) - 1;
+          element.css('font-size', parseFloat(scope.fontSize) + 'px');
+        }
+
+        //while the font-size is too large but not smaller than minSize
+        while( ((element.context.scrollWidth > element.context.offsetWidth) ||
+               (element.context.scrollHeight > element.context.offsetHeight )) &&
+                 (!scope.minSize || scope.fontSize >= scope.minSize) ) {
+
+          //decrease size
+          decreaseFontSize();
+        }
+
+      } // end onResize
 
       //set initial font size
       scope.onResize();
 
       //bind the windows resize to the function we just created
+      // element.on('resize', function() { scope.onResize();});
       angular.element($window).bind('resize', function() { scope.onResize(); });
-    }
+
+    }// end link
 
   };
 }]);
