@@ -29,6 +29,8 @@ Give the element font-size bounds with **min-size** and **max-size**.
 * Allow minimum and maximum bounds to be given in **em** or **px**.
 * Speed up refresh time to reduce window resize lag.
 * Allow users to specify which element attributes trigger a refresh.
+* Come up with a better solution than content overflow after reaching minimum font size.
+* Let the minimum and maximum font sizes to be controlled with a controller scope variable.
 
 ##Dependencies
 * [AngularJS](angularjs.org)
