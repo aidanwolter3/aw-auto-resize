@@ -32,11 +32,19 @@ Or even pass scope variables into the **min-size** and **max-size** so they resp
 </h1>
 ```
 
+An easy method for vertically centering the text is also available with **center-vertically**.
+```html
+<h1 aw-auto-resize center-vertically="true" style="height: 100px">
+  Header which vertically centers the text within itself
+</h1>
+```
+
 ##Todo
 * Allow minimum and maximum bounds to be given in **em** or **px**.
 * Speed up refresh time to reduce window resize lag.
 * Allow users to specify which element attributes trigger a refresh.
 * Come up with a better solution than content overflow after reaching minimum font size.
+* Add images to README.
 
 ##Dependencies
 * [AngularJS](angularjs.org)

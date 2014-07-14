@@ -21,7 +21,8 @@ angular.module('awAutoResize', [])
     scope: {
       'needsResize': '=resizeIf',
       'minSize': '=',
-      'maxSize': '='
+      'maxSize': '=',
+      'centerVertically': '='
     },
 
     //link into the DOM for modification
@@ -60,6 +61,11 @@ angular.module('awAutoResize', [])
           decreaseFontSize();
         }
 
+        //testing - set the padding to center the text
+        if(scope.centerVertically) {
+          element.css('padding-top', (element.height() - scope.fontSize)/2);
+        }
+
       } //end onResize
 
       //set initial font size
@@ -68,14 +74,17 @@ angular.module('awAutoResize', [])
       //watch scope changes in the attributes
       scope.$watch('minSize', function() {
         scope.onResize();
-      })
+      });
       scope.$watch('maxSize', function() {
         scope.onResize();
-      })
+      });
+      scope.$watch('centerVertically', function() {
+        scope.onResize();
+      });
 
       //bind the windows resize to the function we just created
       scope.$watch('needsResize', function(newValue, oldValue) {
-        if(newValue !== oldValue && newValue === true) {
+        if(newValue === true) {
           scope.needsResize = false;
           scope.onResize();
         }
