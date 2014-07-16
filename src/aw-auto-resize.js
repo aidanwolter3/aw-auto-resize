@@ -1,13 +1,16 @@
 /*   Module:
-*       awAutoResize
+*      awAutoResize
 *
 *    Author:
-*       Aidan Wolter
+*      Aidan Wolter
 *
 *    Description:
-*       A directive which automatically resizes the font size of the elements
-*       content to fit within the padding of the element. The directive binds
-*       to the window resize.
+*      A directive which automatically resizes the font size of the elements
+*      content to fit within the padding of the element. The directive binds
+*      to the window resize.
+*
+*    Dependencies:
+*      JQuery
 */
 
 angular.module('awAutoResize', [])

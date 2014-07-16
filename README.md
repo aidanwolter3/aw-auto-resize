@@ -1,9 +1,12 @@
-# aw-auto-resize
-An [AngularJS](angularjs.org) directive which automatically resizes the font size of an element's
-content to fit within the bounds of the element. The directive binds to the
-window resize.
+# awdirs
+A collection of [AngularJS](angularjs.org) directives which I have made for my projects.
 
-##Usage
+#Directives
+* [aw-auto-resize](#aw-auto-resize)
+* [aw-cmd-bar](#aw-cmd-bar)
+* [aw-focus-if](#focus-if)
+
+##aw-auto-resize
 Include the directive into your application or controller.
 ```javascript
 angular.module('myAppOrController', ['awAutoResize']);
@@ -39,13 +42,17 @@ An easy method for vertically centering the text is also available with **center
 </h1>
 ```
 
-##Todo
+###Todo
 * Allow minimum and maximum bounds to be given in **em** or **px**.
 * Speed up refresh time to reduce window resize lag.
 * Allow users to specify which element attributes trigger a refresh.
 * Come up with a better solution than content overflow after reaching minimum font size.
 * Add images to README.
 
-##Dependencies
-* [AngularJS](angularjs.org)
-* [JQuery](jquery.com)
+##aw-cmd-bar
+###Todo
+* Add readme info
+
+##aw-focus-if
+###Todo
+* Add readme info
