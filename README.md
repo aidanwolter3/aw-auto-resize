@@ -51,7 +51,8 @@ An easy method for vertically centering the text is also available with **center
 
 ##aw-cmd-bar
 ###Todo
-* Add readme info
+* Implement regex command searching as well as nested commands
+* Add detailed instructions
 
 ##aw-focus-if
 ###Todo
