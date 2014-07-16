@@ -4,7 +4,7 @@ A collection of [AngularJS](angularjs.org) directives which I have made for my p
 #Directives
 * [aw-auto-resize](#aw-auto-resize)
 * [aw-cmd-bar](#aw-cmd-bar)
-* [aw-focus-if](#focus-if)
+* [aw-focus-if](#aw-focus-if)
 
 ##aw-auto-resize
 Include the directive into your application or controller.

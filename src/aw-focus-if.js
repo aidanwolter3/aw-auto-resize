@@ -12,7 +12,7 @@
 */
 
 angular.module('awFocusIf', [])
-.directive('focusIf', function($timeout) {
+.directive('awFocusIf', function($timeout) {
   return {
 
     //restrict the directive to DOM attributes only
@@ -20,7 +20,7 @@ angular.module('awFocusIf', [])
 
     //define a local scope
     scope: {
-      trigger: '=focusIf'
+      trigger: '=awFocusIf'
     },
 
     //link into the DOM for modification

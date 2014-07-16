@@ -1,5 +1,14 @@
+/*
+resize-view styles
+*/
+.resize-view {
+  width: 33%;
+  height: 100%;
+  float: left;
+}
+
 /* the humongous header */
-h1 {
+.resize-view h1 {
   width: 100%;
   height: 100px;
   text-align: center;
@@ -8,13 +17,13 @@ h1 {
   white-space: nowrap;
 }
 
-#h1-input {
+.resize-view #h1-input {
   width: 100%;
   margin: 0 0 80 0;
 }
 
 /* the example of using min/max bounds */
-h3 {
+.resize-view h3 {
   width: 100%;
   height: 60px;
   margin: 0 0 80 0;
@@ -23,9 +32,38 @@ h3 {
 }
 
 /* the resizing textarea */
-textarea {
+.resize-view textarea {
   width: 400px;
   height: 40px;
   text-align: center;
   white-space: nowrap;
+}
+
+
+.cmd-bar-view {
+  width: 33%;
+  height: 100%;
+  float: right;
+}
+
+/*
+cmd-bar styles
+*/
+.foot {
+  bottom: 0px;
+  width: 100%;
+  height: 30px;
+}
+.foot form {
+  padding: 0em 0em 0em 0em;
+  width: 100%;
+}
+.foot form input {
+  background: linear-gradient(black, #222222);
+  color: white;
+  padding: 0em 0em 0em 0em;
+  font-size: 1em;
+  width: 100%;
+  margin: auto;
+  text-align: center;
 }

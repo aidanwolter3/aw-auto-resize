@@ -1,4 +1,4 @@
-angular.module('AutoResize', ['awAutoResize'])
+angular.module('AutoResize', ['awAutoResize', 'awCmdBar'])
 .controller('ResizeCtrl', function($scope, $timeout) {
   $scope.h1Text = 'This is a header which adjusts its font-size';
   $scope.h3Text = 'Another example except this has a min-size and max-size.';
@@ -6,4 +6,12 @@ angular.module('AutoResize', ['awAutoResize'])
 
   $scope.h3Min = '30';
   $scope.h3Max = '40';
+})
+
+.controller('CmdBarCtrl', function($scope) {
+
+})
+
+.controller('FocusIfCtrl', function($scope) {
+
 });

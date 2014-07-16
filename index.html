@@ -4,17 +4,26 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
   </head>
 
-  <body ng-controller="ResizeCtrl">
-    <h1 aw-auto-resize resize-if="h1Resize">{{h1Text}}</h1>
-    <p>This changes the above header:</p>
-    <input id="h1-input" ng-model="h1Text" ng-change="h1Resize = true"></input>
+  <body>
+    <div class="resize-view" ng-controller="ResizeCtrl">
+      <h1 aw-auto-resize resize-if="h1Resize">{{h1Text}}</h1>
+      <p>This changes the above header:</p>
+      <input id="h1-input" ng-model="h1Text" ng-change="h1Resize = true"></input>
 
-    <p>Try changing the window size and the min/max values:</p>
-    min-size: <input id="h3-input" ng-model="h3Min"></input>
-    max-size: <input id="h3-input" ng-model="h3Max"></input>
-    <h3 aw-auto-resize min-size="h3Min" max-size="h3Max">{{h3Text}}</h3>
+      <p>Try changing the window size and the min/max values:</p>
+      min-size: <input id="h3-input" ng-model="h3Min"></input>
+      max-size: <input id="h3-input" ng-model="h3Max"></input>
+      <h3 aw-auto-resize min-size="h3Min" max-size="h3Max">{{h3Text}}</h3>
 
-    <textarea aw-auto-resize>{{textareaText}}</textarea>
+      <textarea aw-auto-resize>{{textareaText}}</textarea>
+    </div>
+
+    <div class="cmd-bar-view" ng-controller="CmdBarCtrl">
+      <aw-cmd-bar class="foot" commands="commandTable">
+    </div>
+
+    <div class="focus-if-view" ng-controller="FocusIfCtrl">
+    </div>
 
     <!-- scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.10/angular.js"></script>
