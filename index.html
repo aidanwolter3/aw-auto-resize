@@ -5,6 +5,8 @@
   </head>
 
   <body>
+
+    <!-- aw-auto-resize -->
     <div class="resize-view" ng-controller="ResizeCtrl">
       <h1 aw-auto-resize resize-if="h1Resize">{{h1Text}}</h1>
       <p>This changes the above header:</p>
@@ -18,10 +20,16 @@
       <textarea aw-auto-resize>{{textareaText}}</textarea>
     </div>
 
+    <!-- aw-cmd-bar -->
     <div class="cmd-bar-view" ng-controller="CmdBarCtrl">
-      <aw-cmd-bar class="foot" commands="commandTable">
+      <button style="float:down" ng-click="focusCmdBar = true">focus</button>
+      <aw-cmd-bar default-placeholder="cmdBarPlaceholder"
+                  commands="commandTable"
+                  cancel-on="cancelCmdBar"
+                  focus-on="focusCmdBar">
     </div>
 
+    <!-- aw-focus-if -->
     <div class="focus-if-view" ng-controller="FocusIfCtrl">
     </div>
 

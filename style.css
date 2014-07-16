@@ -39,31 +39,34 @@ resize-view styles
   white-space: nowrap;
 }
 
-
+/*
+cmd-bar styles
+*/
 .cmd-bar-view {
   width: 33%;
   height: 100%;
   float: right;
 }
-
-/*
-cmd-bar styles
-*/
-.foot {
-  bottom: 0px;
+aw-cmd-bar {
   width: 100%;
-  height: 30px;
 }
-.foot form {
+aw-cmd-bar form {
   padding: 0em 0em 0em 0em;
   width: 100%;
 }
-.foot form input {
-  background: linear-gradient(black, #222222);
-  color: white;
+aw-cmd-bar form input {
+  border: none;
+  outline: none;
+  background-color :transparent;
+
+  background: #00A5CE;
+  color: black;
   padding: 0em 0em 0em 0em;
   font-size: 1em;
   width: 100%;
   margin: auto;
   text-align: center;
+}
+aw-cmd-bar form input::-webkit-input-placeholder {
+  color: black;
 }
