@@ -26,25 +26,25 @@ angular.module('awCmdBar', ['awFocusIf'])
       'commandTable': '=commands',
       'defaultPlaceholder': '=',
       'focusOn': '=',
-      'cancelOn': '='
+      'cancelOn': '=',
+			'inputContent': '='
     },
 
     //create the html template
-    template: "<form ng-submit='submitCommand()'><input type='text' class='clear-input' ng-model='commandInput' aw-focus-if='userFocusedCommandBar' ng-focus='didFocusCommandBar()' ng-blur='didBlurCommandBar()' ng-attr-placeholder='{{commandBarPlaceholder}}'></input></form>",
+    template: "<form ng-submit='submitCommand()'><input type='text' class='clear-input' ng-model='inputContent' aw-focus-if='focusOn' ng-focus='didFocusCommandBar()' ng-blur='didBlurCommandBar()' ng-attr-placeholder='{{commandBarPlaceholder}}'></input></form>",
 
     //link into the DOM for modification
     link: function(scope, element, attrs) {
 
       //set the defaults
       scope.commandBarPlaceholder = scope.defaultPlaceholder;
-      scope.commandInput          = '';
-      scope.userFocusedCommandBar = false;
+      scope.focusOn = false;
 
       //user submitted a command
       scope.submitCommand = function() {
 
         //get the first part of the command
-        var comm = scope.commandInput
+        var comm = scope.inputContent
         comm = comm.split(' ');
         var first = comm[0];
 
@@ -62,31 +62,33 @@ angular.module('awCmdBar', ['awFocusIf'])
         }
 
         //clear the input contents
-        scope.commandInput = '';
+        scope.inputContent = '';
       }
 
       //focus and blur on command bar events
       scope.didFocusCommandBar = function() {
-        scope.commandBarPlaceholder = '';
-        scope.userFocusedCommandBar = true;
+        scope.focusOn = true;
       }
       scope.didBlurCommandBar = function() {
-        scope.commandBarPlaceholder = scope.defaultPlaceholder;
-        scope.commandInput          = '';
-        scope.userFocusedCommandBar = false;
+				scope.focusOn = false;
+				scope.inputContent = '';
       }
+
+			//watch the focus on trigger to update the command bar status
+			scope.$watch('focusOn', function() {
+				if(scope.focusOn) {
+					scope.focusOn = true;
+					scope.commandBarPlaceholder = '';
+				} else {
+					scope.focusOn = false;
+					scope.commandBarPlaceholder = scope.defaultPlaceholder;
+				}
+			});
 
       //watch when to focus or cancel focus on the command bar
       scope.$watch('focusOn', function() {
-        scope.userFocusedCommandBar = scope.focusOn;
+        scope.focusOn = scope.focusOn;
       });
-      scope.$watch('cancelOn', function() {
-        if(scope.cancelOn) {
-          scope.commandBarPlaceholder = scope.defaultPlaceholder;
-          scope.commandInput          = '';
-          scope.userFocusedCommandBar = false;
-        }
-      })
     }
   }
 });
