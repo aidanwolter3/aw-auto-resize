@@ -26,7 +26,7 @@ angular.module('awCmdBar', ['awFocusIf'])
       'commandTable': '=commands',
       'defaultPlaceholder': '=',
       'focusOn': '=?',
-			'inputContent': '@'
+			'inputContent': '=?'
     },
 
     //create the html template
