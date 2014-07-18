@@ -25,9 +25,8 @@ angular.module('awCmdBar', ['awFocusIf'])
     scope: {
       'commandTable': '=commands',
       'defaultPlaceholder': '=',
-      'focusOn': '=',
-      'cancelOn': '=',
-			'inputContent': '='
+      'focusOn': '=?',
+			'inputContent': '@'
     },
 
     //create the html template
@@ -43,16 +42,33 @@ angular.module('awCmdBar', ['awFocusIf'])
       //user submitted a command
       scope.submitCommand = function() {
 
+				//verify that commandTable was set
+				if(!scope.commandTable) {
+					console.log('Commands are not set for aw-cmd-bar!');
+					return;
+				}
+
         //get the first part of the command
-        var comm = scope.inputContent
+        var comm = scope.inputContent;
         comm = comm.split(' ');
         var first = comm[0];
 
-        //remove the first from comm to leave the rest of the arguments
-        comm = comm.slice(1, comm.length);
-
-        //find the command in the table and run
+        //check commandTable for exact matches
         var command = scope.commandTable[first];
+
+				//if no exact matches are found
+				if(!command) {
+					
+					//check if matches anything in commandTable as a regex
+					for(key in scope.commandTable) {
+						var patt = new RegExp(key);
+						if(patt.test(first)) {
+							command = scope.commandTable[key];
+							break;
+						}
+					}
+				}
+
         if(command) {
           command(comm);
 
@@ -63,6 +79,7 @@ angular.module('awCmdBar', ['awFocusIf'])
 
         //clear the input contents
         scope.inputContent = '';
+				scope.focusOn = false;
       }
 
       //focus and blur on command bar events

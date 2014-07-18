@@ -9,15 +9,29 @@ angular.module('AutoResize', ['awAutoResize', 'awCmdBar', 'awFocusIf'])
 })
 
 .controller('CmdBarCtrl', function($scope) {
-  $scope.cancelCmdBar      = false;
+	$scope.focusCmdBar = false;
+	$scope.cmdBarContent = '';
   $scope.cmdBarPlaceholder = 'enter a command...';
+
+	//build the commandTable for the command bar
   $scope.commandTable = {
+
+		//example of a regular command
     'run': runComm = function() {
       console.log('running command...');
     },
-    'go': goComm = function() {
+
+		//regex command
+    'go(ing)?': goComm = function() {
       console.log('going!');
-    }
+    },
+
+		//command with arguments
+	  'print': argsComm = function(comm) {
+			if(comm[1]) {
+				console.log('You want me to print \''+comm[1]+'\'!');
+			}
+		}
   }
 })
 
