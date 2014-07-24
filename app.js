@@ -14,25 +14,35 @@ angular.module('AutoResize', ['awAutoResize', 'awCmdBar', 'awFocusIf'])
   $scope.cmdBarPlaceholder = 'enter a command...';
 
 	//build the commandTable for the command bar
-  $scope.commandTable = {
+  $scope.commandTable = [
 
 		//example of a regular command
-    'run': runComm = function() {
-      console.log('running command...');
+    {
+      'match': 'run',
+      'onEnter': runComm = function() {
+        console.log('running command...');
+      }
     },
 
 		//regex command
-    'go(ing)?': goComm = function() {
-      console.log('going!');
+    {
+      'match': '^go(ing)?$',
+      'regex': true,
+      'onEnter': goComm = function() {
+        console.log('going!');
+      }
     },
 
 		//command with arguments
-	  'print': argsComm = function(comm) {
-			if(comm[1]) {
-				console.log('You want me to print \''+comm[1]+'\'!');
-			}
-		}
-  }
+    {
+      'match': 'print',
+      'onEnter': argsComm = function(comm) {
+        if(comm[1]) {
+          console.log('You want me to print \''+comm[1]+'\'!');
+        }
+      }
+    }
+  ]
 })
 
 .controller('FocusIfCtrl', function($scope) {

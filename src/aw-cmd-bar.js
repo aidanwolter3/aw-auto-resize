@@ -53,29 +53,30 @@ angular.module('awCmdBar', ['awFocusIf'])
         comm = comm.split(' ');
         var first = comm[0];
 
-        //check commandTable for exact matches
-        var command = scope.commandTable[first];
-
-        //if no exact matches are found
-        if(!command) {
+        var onEnter = null;
+        for(var commIndex in scope.commandTable) {
+          var command = scope.commandTable[commIndex];
           
-          //check if matches anything in commandTable as a regex
-          for(key in scope.commandTable) {
-            var patt = new RegExp(key);
+          //not a regex match
+          if(!command.regex) {
+            if(first == command.match) {
+              onEnter = command.onEnter;
+              break;
+            }
+
+          //regex match
+          } else {
+            var patt = new RegExp(command.match);
             if(patt.test(first)) {
-              command = scope.commandTable[key];
+              onEnter = command.onEnter;
               break;
             }
           }
         }
 
-        if(command) {
-          command(comm);
-
-        //couldn't find the command
-        } else {
-          console.log('Invalid command!');
-        }
+        //run the command if it exists
+        if(onEnter)
+          onEnter(comm);
 
         //clear the input contents
         scope.inputContent = '';
@@ -91,6 +92,37 @@ angular.module('awCmdBar', ['awFocusIf'])
         scope.inputContent = '';
       }
 
+      //watch the inputContent to trigger onChange commands
+      scope.$watch('inputContent', function() {
+
+        if(scope.inputContent == null) {
+          return;
+        }
+
+        //get the first part of the command
+        var comm = scope.inputContent;
+        comm = comm.split(' ');
+        var first = comm[0];
+
+        var onChange = null;
+        for(var commIndex in scope.commandTable) {
+          var command = scope.commandTable[commIndex];
+          
+          //is a regex match
+          if(command.regex) {
+            var patt = new RegExp(command.match);
+            if(patt.test(first)) {
+              onChange = command.onChange;
+              break;
+            }
+          }
+        }
+
+        //run the command if it exists
+        if(onChange)
+          onChange(comm);
+      });
+
       //watch the focus on trigger to update the command bar status
       scope.$watch('focusOn', function() {
         if(scope.focusOn) {
@@ -102,9 +134,9 @@ angular.module('awCmdBar', ['awFocusIf'])
         }
       });
 
-      //watch when to focus or cancel focus on the command bar
-      scope.$watch('focusOn', function() {
-        scope.focusOn = scope.focusOn;
+      //watch the defaultPlaceholder
+      scope.$watch('defaultPlaceholder', function() {
+        scope.commandBarPlaceholder = scope.defaultPlaceholder;
       });
     }
   }
